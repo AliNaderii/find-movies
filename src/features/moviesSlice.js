@@ -9,6 +9,7 @@ const initialState = {
   status: 'idle',
   error: null,
   term: 'harry',
+  totalResults: 0,
   moviesPageIndex: 1,
   seriesPageIndex: 1
 };
@@ -66,6 +67,11 @@ const moviesSlice = createSlice({
       else {
         ++state.seriesPageIndex;
       }
+    },
+
+    resetPageIndex: (state, { payload }) => {
+      payload === 'movies' ?
+        state.moviesPageIndex = 1 : state.seriesPageIndex = 1;
     }
   },
   extraReducers: (builder) => {
@@ -80,6 +86,7 @@ const moviesSlice = createSlice({
           state.status = 'succeeded';
           state.movies = [...action.payload.data.Search];
           state.term = action.payload.term;
+          state.totalResults = action.payload.data.totalResults;
         }
       )
       .addCase(
@@ -100,6 +107,7 @@ const moviesSlice = createSlice({
           state.status = 'succeeded';
           state.series = [...action.payload.data.Search];
           state.term = action.payload.term;
+          state.totalResults = action.payload.data.totalResults;
         }
       )
       .addCase(
@@ -113,5 +121,5 @@ const moviesSlice = createSlice({
 
 export const selectAllMovies = state => state.movies.movies;
 export const selectAllSeries = state => state.movies.series;
-export const { addMovies, incrementPage } = moviesSlice.actions;
+export const { addMovies, incrementPage, resetPageIndex } = moviesSlice.actions;
 export default moviesSlice.reducer;
