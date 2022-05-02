@@ -1,0 +1,72 @@
+@use '../../scss/base' as *;
+
+.home-container {
+  padding: $padding-lg;
+  width: 80%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+  
+    .search-container {
+      outline: 1px solid $font-secondary;
+      border-radius: 5px;
+      width: 80%;
+  
+      .input {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        color: $font-primary;
+        font-size: $font-m;
+        padding: $padding-base;
+        width: 100%;
+      }
+  
+      // .button {
+      //   background-color: $primary-color;
+      //   color: $font-primary;
+      //   font-size: $font-m;
+      //   border-left: 2px solid $font-secondary;
+      //   padding: $padding-base;
+      //   transition: all 0.3s ease;
+  
+      //   &:hover {
+      //     color: $font-secondary;
+      //     border-left: 2px solid $font-primary;
+      //   }
+      // }
+    }
+  
+    .btn-container {
+      display: flex;
+      gap: 50px;
+  
+      .btn {
+        min-width: 200px;
+        outline: 3px solid $font-secondary;
+        border-radius: 5px;
+        padding: $padding-base;
+        color: $font-primary;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        font-size: $font-lg;
+  
+        &:hover {
+          color: $font-secondary;
+          outline: 3px solid $font-primary;
+        }
+      }
+    }
+  }
+}

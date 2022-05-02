@@ -1,0 +1,38 @@
+$primary-color: #0f171e;
+$secondary-color: #1a242f;
+$font-primary: #fff;
+$font-secondary: #79b8f3;
+
+$padding-sm: 0.5rem;
+$padding-base: 1rem;
+$padding-lg: 2rem;
+$margin-base: 1rem;
+
+$font-sm: 14px;
+$font-m: 16px;
+$font-lg: 18px;
+
+@mixin global {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+    color: unset;
+  }
+
+  button {
+    border: unset;
+    background-color: unset;
+    cursor: pointer;
+    font-size: $font-m;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+}

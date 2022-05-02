@@ -1,0 +1,17 @@
+@use '../../scss/base' as *;
+
+.footer-container {
+  text-align: center;
+  padding: $padding-base;
+  background-color: $secondary-color;
+
+  .footer-logo {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .footer-info {
+    font-style: italic;
+  }
+}

@@ -1,0 +1,40 @@
+@use '../../scss/base' as *;
+
+.list-container {
+  padding: $padding-base;
+  width: 80%;
+  margin: 0 auto;
+  flex: 1;
+  
+  .cards-container {
+    margin-top: $margin-base;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .title {
+    color: $font-secondary;
+  }
+
+  .next-page-btn {
+    color: $font-secondary;
+    border: 3px solid $font-primary;
+    height: 100px;
+    width: 100px;    
+    align-self: center;
+    justify-self: center;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-size: $font-lg;
+    font-weight: 700;
+
+    &:hover {
+      color: $font-primary;
+      border: 3px solid $font-secondary;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@use './scss/base' as *;
+@include global;
+
+.main-container {
+  background-color: $primary-color;
+  color: $font-primary;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
