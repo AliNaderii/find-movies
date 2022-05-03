@@ -4,17 +4,16 @@ import './Home.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAllMovies, getAllSeries, resetPageIndex, resetError } from '../../features/moviesSlice';
+import { getAllMovies, getAllSeries, resetState } from '../../features/moviesSlice';
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('');
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const findMovies = (e) => {
     e.preventDefault();
-    dispatch(resetPageIndex('movies'));
-    dispatch(resetError());
+    dispatch(resetState());
 
     if (searchValue) {
       dispatch(getAllMovies({ term: searchValue }));
@@ -24,8 +23,7 @@ export default function Home() {
 
   const findSeries = (e) => {
     e.preventDefault();
-    dispatch(resetPageIndex('series'));
-    dispatch(resetError('series'));
+    dispatch(resetState());
 
     if (searchValue) {
       dispatch(getAllSeries({ term: searchValue }));

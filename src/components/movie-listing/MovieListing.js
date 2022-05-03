@@ -15,25 +15,23 @@ export default function MovieListing() {
   const state = useSelector(state => state.movies);
   const term = state.term;
   const totalResults = state.totalResults;
-  const pageIndex = query === 'movies' ?
-    state.moviesPageIndex : state.seriesPageIndex;
+  const pageIndex = state.pageIndex;
   const shows = query === 'movies' ? state.movies : state.series;
   const totalPages = Math.floor(state.totalResults / 10);
   console.log(state);
+  const page = state.pageIndex + 1;
 
   const moviesNextPage = () => {
-    const nextPage = state.moviesPageIndex + 1;
-    dispatch(getAllMovies({ term, nextPage }));
+    dispatch(getAllMovies({ term, page }));
     dispatch(incrementPage('movies'));
   };
 
   const seriesNextPage = () => {
-    const nextPage = state.seriesPageIndex + 1;
-    dispatch(getAllSeries({ term, nextPage }));
+    dispatch(getAllSeries({ term, page }));
     dispatch(incrementPage('seires'));
   };
 
-  const nextPage = () => {
+  const goToNextPage = () => {
     if (query === 'movies') {
       moviesNextPage();
     } else {
@@ -55,21 +53,21 @@ export default function MovieListing() {
           </p>
           <div className="cards-container">
             {
-              shows.map(item => (
-                <MovieCard movie={item} key={item.imdbID} />
+              shows.map(show => (
+                <MovieCard movie={show} key={show.imdbID} />
               ))
             }
             <div className='pagination'>
               <div className="btn-container">
                 <button
                   className='change-page-btn'
-                  onClick={() => nextPage()}
+                  onClick={() => goToNextPage()}
                 >
                   Prev
                 </button>
                 <button
                   className='change-page-btn'
-                  onClick={() => nextPage()}
+                  onClick={() => goToNextPage()}
                 >
                   Next
                 </button>

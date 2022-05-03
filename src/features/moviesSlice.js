@@ -8,16 +8,15 @@ const initialState = {
   series: [],
   status: 'idle',
   error: null,
-  term: 'harry',
+  defaultTerm: 'harry',
+  term: '',
   totalResults: 0,
-  moviesPageIndex: 1,
-  seriesPageIndex: 1
+  pageIndex: 1,
 };
 
 export const getAllMovies = createAsyncThunk('movies/getAllMovies',
-  async (terms = {}) => {
-    const term = terms.term || initialState.term;
-    const page = terms.nextPage || 1;
+  async (terms) => {
+    const { term, page = 1 } = terms;
     try {
       const res = await axios.get(`${BASE_URL}&s=${term}&type=movie&page=${page}`);
       if (!res) {
@@ -34,9 +33,8 @@ export const getAllMovies = createAsyncThunk('movies/getAllMovies',
   });
 
 export const getAllSeries = createAsyncThunk('movies/getAllSeries',
-  async (terms = {}) => {
-    const term = terms.term || initialState.term;
-    const page = terms.nextPage || 1;
+  async (terms) => {
+    const { term, page } = terms;
     try {
       const res = await axios.get(`${BASE_URL}&s=${term}&type=series&page=${page}`);
       if (!res) {
@@ -56,26 +54,13 @@ const moviesSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
-    addMovies: (state, action) => {
-      state.movies = action.payload;
+    incrementPage: (state, action) => {
+      ++state.pageIndex;
     },
 
-    incrementPage: (state, { payload }) => {
-      if (payload === 'movies') {
-        ++state.moviesPageIndex;
-      }
-      else {
-        ++state.seriesPageIndex;
-      }
-    },
-
-    resetPageIndex: (state, { payload }) => {
-      payload === 'movies' ?
-        state.moviesPageIndex = 1 : state.seriesPageIndex = 1;
-    },
-
-    resetError: (state, action) => {
+    resetState: (state, action) => {
       state.error = null;
+      state.pageIndex = 1;
     }
   },
   extraReducers: (builder) => {
@@ -86,15 +71,15 @@ const moviesSlice = createSlice({
         }
       )
       .addCase(
-        getAllMovies.fulfilled, (state, action) => {
-          if (action.payload.data.Error) {
-            state.error = action.payload.data.Error;
+        getAllMovies.fulfilled, (state, { payload }) => {
+          if (payload.data.Error) {
+            state.error = payload.data.Error;
             return;
           } else {
+            const { term } = payload;
+            const { Search: movies, totalResults } = payload.data;
             state.status = 'succeeded';
-            state.movies = [...action.payload.data.Search];
-            state.term = action.payload.term;
-            state.totalResults = action.payload.data.totalResults;
+            Object.assign(state, { movies, term, totalResults });
           }
 
         }
@@ -113,15 +98,15 @@ const moviesSlice = createSlice({
         }
       )
       .addCase(
-        getAllSeries.fulfilled, (state, action) => {
-          if (action.payload.data.Error) {
-            state.error = action.payload.data.Error;
+        getAllSeries.fulfilled, (state, { payload }) => {
+          if (payload.data.Error) {
+            state.error = payload.data.Error;
             return;
           } else {
+            const { term } = payload;
+            const { Search: series, totalResults } = payload.data;
             state.status = 'succeeded';
-            state.series = [...action.payload.data.Search];
-            state.term = action.payload.term;
-            state.totalResults = action.payload.data.totalResults;
+            Object.assign(state, { series, term, totalResults });
           }
         }
       )
@@ -136,5 +121,5 @@ const moviesSlice = createSlice({
 
 export const selectAllMovies = state => state.movies.movies;
 export const selectAllSeries = state => state.movies.series;
-export const { addMovies, incrementPage, resetPageIndex, resetError } = moviesSlice.actions;
+export const { addMovies, incrementPage, resetState } = moviesSlice.actions;
 export default moviesSlice.reducer;
