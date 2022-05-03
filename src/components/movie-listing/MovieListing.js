@@ -7,6 +7,7 @@ import { getAllMovies, getAllSeries, incrementPage } from '../../features/movies
 // components
 import MovieCard from '../movie-card/MovieCard';
 import Spinner from '../spinner/Spinner';
+import Error from '../error/Error';
 
 export default function MovieListing() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export default function MovieListing() {
     state.moviesPageIndex : state.seriesPageIndex;
   const shows = query === 'movies' ? state.movies : state.series;
   const totalPages = Math.floor(state.totalResults / 10);
+  console.log(state);
 
   const moviesNextPage = () => {
     const nextPage = state.moviesPageIndex + 1;
@@ -77,9 +79,16 @@ export default function MovieListing() {
           </div>
         </>
       }
-
-      {state.status === 'loading' && <Spinner />}
-      {state.status === 'failed' && <p>{state.error}</p>}
+      {
+        (state.status === 'failed' || state.error)
+        &&
+        <Error message={state.error} />
+      }
+      {
+        (state.status === 'loading' && !state.error)
+        &&
+        <Spinner />
+      }
     </div >
   );
 }
