@@ -114,10 +114,15 @@ const moviesSlice = createSlice({
       )
       .addCase(
         getAllSeries.fulfilled, (state, action) => {
-          state.status = 'succeeded';
-          state.series = [...action.payload.data.Search];
-          state.term = action.payload.term;
-          state.totalResults = action.payload.data.totalResults;
+          if (action.payload.data.Error) {
+            state.error = action.payload.data.Error;
+            return;
+          } else {
+            state.status = 'succeeded';
+            state.series = [...action.payload.data.Search];
+            state.term = action.payload.term;
+            state.totalResults = action.payload.data.totalResults;
+          }
         }
       )
       .addCase(

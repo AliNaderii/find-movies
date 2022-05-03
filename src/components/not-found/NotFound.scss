@@ -1,0 +1,15 @@
+@use '../../scss/base' as *;
+
+.notfound-container {
+  padding: $padding-base;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 40%;
+    border-radius: 5px;
+  }
+}

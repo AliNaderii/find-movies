@@ -1,16 +1,16 @@
 @use '../../scss/base' as *;
 
 .error-container {
-  padding: $padding-base;
   margin: 0 auto;
   width: 100%;
-  border: 2px solid red;
-  border-radius: 5px;
-  background-color: rgba($color: red, $alpha: 0.1);
 
   .error-text {
-    color: red;
+    padding: $padding-base;
     font-size: $font-lg;
     text-align: center;
+    color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+    background-color: rgba($color: red, $alpha: 0.1);
   }
 }
