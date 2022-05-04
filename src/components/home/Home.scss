@@ -10,6 +10,24 @@
   align-items: center;
   gap: 50px;
 
+  .title-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .title {
+      color: $font-secondary;
+      text-align: center;
+    }
+    
+    .error {
+      position: absolute;
+      color: red;
+      bottom: -30px;
+    }
+  }
+
   .form-container {
     display: flex;
     flex-direction: column;
