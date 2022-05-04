@@ -3,7 +3,7 @@ import './MovieListing.scss';
 // tools
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllMovies, getAllSeries, incrementPage } from '../../features/moviesSlice';
+import { getAllMovies, getAllSeries, changePageIndex } from '../../features/moviesSlice';
 // components
 import MovieCard from '../movie-card/MovieCard';
 import Spinner from '../spinner/Spinner';
@@ -19,16 +19,26 @@ export default function MovieListing() {
   const shows = query === 'movies' ? state.movies : state.series;
   const totalPages = Math.floor(state.totalResults / 10);
   console.log(state);
-  const page = state.pageIndex + 1;
+  const page = state.pageIndex;
 
   const moviesNextPage = () => {
-    dispatch(getAllMovies({ term, page }));
-    dispatch(incrementPage('movies'));
+    dispatch(getAllMovies({ term, page: page + 1 }));
+    dispatch(changePageIndex('increment'));
+  };
+
+  const moviesPrevPage = () => {
+    dispatch(getAllMovies({ term, page: page - 1 }));
+    dispatch(changePageIndex('decrement'));
   };
 
   const seriesNextPage = () => {
-    dispatch(getAllSeries({ term, page }));
-    dispatch(incrementPage('seires'));
+    dispatch(getAllSeries({ term, page: page + 1 }));
+    dispatch(changePageIndex('increment'));
+  };
+
+  const seriesPrevPage = () => {
+    dispatch(getAllSeries({ term, page: page - 1 }));
+    dispatch(changePageIndex('decrement'));
   };
 
   const goToNextPage = () => {
@@ -36,6 +46,14 @@ export default function MovieListing() {
       moviesNextPage();
     } else {
       seriesNextPage();
+    }
+  };
+
+  const goToPrevPage = () => {
+    if (query === 'movies') {
+      moviesPrevPage();
+    } else {
+      seriesPrevPage();
     }
   };
 
@@ -61,7 +79,7 @@ export default function MovieListing() {
               <div className="btn-container">
                 <button
                   className='change-page-btn'
-                  onClick={() => goToNextPage()}
+                  onClick={() => goToPrevPage()}
                 >
                   Prev
                 </button>

@@ -54,8 +54,9 @@ const moviesSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
-    incrementPage: (state, action) => {
-      ++state.pageIndex;
+    changePageIndex: (state, action) => {
+      action.payload === 'increment' ?
+        ++state.pageIndex : --state.pageIndex;
     },
 
     resetState: (state, action) => {
@@ -121,5 +122,5 @@ const moviesSlice = createSlice({
 
 export const selectAllMovies = state => state.movies.movies;
 export const selectAllSeries = state => state.movies.series;
-export const { addMovies, incrementPage, resetState } = moviesSlice.actions;
+export const { addMovies, changePageIndex, resetState } = moviesSlice.actions;
 export default moviesSlice.reducer;
