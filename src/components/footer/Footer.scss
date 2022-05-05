@@ -28,3 +28,34 @@
     }
   }
 }
+
+@include media(320px, 700px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+  
+    .footer-info {
+      font-size: $font-m;
+    }
+  
+    .contact-container {
+  
+      a {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@include media(700px, 1000px) {
+  .footer-container {
+    flex-direction: row;
+
+    .contact-container {
+
+      a {
+        font-size: 22px;
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ $padding-base: 1rem;
 $padding-lg: 2rem;
 $margin-base: 1rem;
 
+$font-xs: 12px;
 $font-sm: 14px;
 $font-m: 16px;
 $font-lg: 18px;
@@ -56,5 +57,12 @@ $font-lg: 18px;
 
   ul {
     list-style-type: none;
+  }
+}
+
+// media query 
+@mixin media($min-width, $max-width) {
+  @media screen and (min-width: $min-width) and (max-width: $max-width) {
+    @content;
   }
 }

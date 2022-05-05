@@ -73,3 +73,74 @@
     }
   }
 }
+
+@include media(320px, 700px) {
+  .home-container {
+    padding: $padding-base;
+    width: 100%;
+  
+    .title-container {
+  
+      .error {
+        bottom: -20px;
+      }
+    }
+  
+    .form-container {
+      gap: 50px;
+  
+      .search-container {
+        width: 100%;
+  
+        .input {
+          font-size: $font-sm;
+          padding: $padding-sm;
+        }
+      }
+  
+      .btn-container {
+        gap: 25px;
+  
+        .btn {
+          min-width: 100px;
+          font-weight: 600;
+          font-size: $font-sm;
+        }
+      }
+    }
+  }
+}
+
+@include media(700px, 1000px) {
+  .home-container {
+    width: 90%;
+
+    .title-container {
+
+      .error {
+        bottom: -25px;
+      }
+    }
+
+    .form-container {
+
+      .search-container {
+        width: 90%;
+
+        .input {
+          font-size: $font-m;
+          padding: $padding-base;
+        }
+      }
+
+      .btn-container {
+        gap: 35px;
+
+        .btn {
+          min-width: 150px;
+          font-size: $font-m;
+        }
+      }
+    }
+  }
+}
