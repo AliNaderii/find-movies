@@ -1,13 +1,16 @@
 @use '../../scss/base' as *;
 
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: $padding-base;
   background-color: $secondary-color;
 
   .logo {
     @include textShadow;
+  }
+}
+
+@include media(320px, 700px) {
+  .header-container {
+    text-align: center;
   }
 }

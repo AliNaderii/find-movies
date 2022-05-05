@@ -24,7 +24,7 @@
   .cards-container {
     margin-top: $margin-base;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
   }
   
@@ -56,5 +56,57 @@
       }
     }
   }
+}
+
+@include media(320px, 700px) {
+  .list-container {
+    width: 100%;
   
+    .info {
+      font-size: $font-sm;
+      text-align: center;
+  
+      .title {
+        font-weight: 600;
+        font-size: 20px;
+      }
+    }
+  
+    .pagination {
+      padding: $padding-sm;
+  
+      .btn-container {
+        margin-bottom: $margin-base;
+        gap: 2rem;
+      }
+  
+      .change-page-btn {
+        min-width: 75px;
+        font-size: $font-m;
+      }
+    }
+  }
+}
+
+@include media(700px, 1000px) {
+  .list-container {
+    width: 90%;
+  
+    .info {
+      font-size: $font-m;
+  
+      .title {
+        font-weight: 700;
+        font-size: 22px;
+      }
+    }
+  
+    .pagination {
+  
+      .change-page-btn {
+        min-width: 85px;
+        font-size: $font-m;
+      }
+    }
+  }
 }

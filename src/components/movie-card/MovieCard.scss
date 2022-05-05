@@ -52,3 +52,28 @@
     }
   }
 }
+
+@include media (320px, 700px) {
+  .card {  
+  
+    .card-img {
+  
+      .photo {
+        width: 100%;
+        height: 100%;
+        object-fit:scale-down;
+      }
+    }
+  
+    .card-info {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      flex: unset;
+  
+      .card-title {
+        margin-bottom: unset;
+      }
+    }
+  }
+}

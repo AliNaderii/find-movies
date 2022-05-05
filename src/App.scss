@@ -9,3 +9,21 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+@include media(320px, 500px) {
+  html {
+    font-size: $font-xs;
+  }
+}
+
+@include media(500px, 700px) {
+  html {
+    font-size: $font-sm;
+  }
+}
+
+@include media(700px, 1000px) {
+  html {
+    font-size: $font-m;
+  }
+}
