@@ -37,7 +37,6 @@ export default function Home() {
     }
   };
 
-  console.log(process.env);
 
   useEffect(() => {
     inputRef.current.focus();
