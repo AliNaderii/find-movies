@@ -13,30 +13,28 @@ export default function MovieListing() {
   const dispatch = useDispatch();
   const query = useParams().param;
   const state = useSelector(state => state.movies);
-  const term = state.term;
-  const totalResults = state.totalResults;
-  const pageIndex = state.pageIndex;
+
+  const { term, totalResults, pageIndex } = state;
   const shows = query === 'movies' ? state.movies : state.series;
-  const totalPages = Math.floor(state.totalResults / 10);
-  const page = state.pageIndex;
+  const totalPages = Math.floor(totalResults / 10);
 
   const moviesNextPage = () => {
-    dispatch(getAllMovies({ term, page: page + 1 }));
+    dispatch(getAllMovies({ term, page: pageIndex + 1 }));
     dispatch(changePageIndex('increment'));
   };
 
   const moviesPrevPage = () => {
-    dispatch(getAllMovies({ term, page: page - 1 }));
+    dispatch(getAllMovies({ term, page: pageIndex - 1 }));
     dispatch(changePageIndex('decrement'));
   };
 
   const seriesNextPage = () => {
-    dispatch(getAllSeries({ term, page: page + 1 }));
+    dispatch(getAllSeries({ term, page: pageIndex + 1 }));
     dispatch(changePageIndex('increment'));
   };
 
   const seriesPrevPage = () => {
-    dispatch(getAllSeries({ term, page: page - 1 }));
+    dispatch(getAllSeries({ term, page: pageIndex - 1 }));
     dispatch(changePageIndex('decrement'));
   };
 
@@ -79,6 +77,7 @@ export default function MovieListing() {
                 <button
                   className='change-page-btn'
                   onClick={() => goToPrevPage()}
+                  disabled={pageIndex < 2}
                 >
                   Prev
                 </button>
