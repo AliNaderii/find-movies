@@ -18,7 +18,6 @@ export default function MovieListing() {
   const pageIndex = state.pageIndex;
   const shows = query === 'movies' ? state.movies : state.series;
   const totalPages = Math.floor(state.totalResults / 10);
-  console.log(state);
   const page = state.pageIndex;
 
   const moviesNextPage = () => {

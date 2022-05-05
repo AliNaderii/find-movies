@@ -33,7 +33,7 @@ export default function Home() {
       setError('You did not searched for anything');
     } else {
       dispatch(getAllSeries({ term: searchValue }));
-      navigate('/list/movies');
+      navigate('/list/series');
     }
   };
 
