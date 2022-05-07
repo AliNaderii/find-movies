@@ -56,7 +56,7 @@ const moviesSlice = createSlice({
   reducers: {
     changePageIndex: (state, action) => {
       action.payload === 'increment' ?
-        ++state.pageIndex : --state.pageIndex;
+        state.pageIndex++ : state.pageIndex--;
     },
 
     resetState: (state, action) => {
